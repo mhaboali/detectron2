@@ -97,15 +97,15 @@ if __name__ == "__main__":
                     out_filename = args.output
                 visualized_output.save(out_filename)
             else:
-                cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
+                cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_AUTOSIZE)
                 cv2.imshow(WINDOW_NAME, visualized_output.get_image()[:, :, ::-1])
                 if cv2.waitKey(0) == 27:
                     break  # esc to quit
     elif args.webcam:
         assert args.input is None, "Cannot have both --input and --webcam!"
-        cam = cv2.VideoCapture(0)
+        cam = cv2.VideoCapture(4)
         for vis in tqdm.tqdm(demo.run_on_video(cam)):
-            cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
+            cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_AUTOSIZE)
             cv2.imshow(WINDOW_NAME, vis)
             if cv2.waitKey(1) == 27:
                 break  # esc to quit
@@ -139,7 +139,7 @@ if __name__ == "__main__":
             if args.output:
                 output_file.write(vis_frame)
             else:
-                cv2.namedWindow(basename, cv2.WINDOW_NORMAL)
+                cv2.namedWindow(basename, cv2.WINDOW_AUTOSIZE)
                 cv2.imshow(basename, vis_frame)
                 if cv2.waitKey(1) == 27:
                     break  # esc to quit
